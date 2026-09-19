@@ -1,0 +1,15 @@
+# Fuente institucional: NO se publica en el repositorio por defecto.
+data/source/*.xlsx
+!data/source/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# SO / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
