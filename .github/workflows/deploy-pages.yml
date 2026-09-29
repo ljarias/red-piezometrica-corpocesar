@@ -24,6 +24,9 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v6
 
+      - name: Validar privacidad del dataset público
+        run: python scripts/validate_public_data.py
+
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
 
