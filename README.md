@@ -1,4 +1,4 @@
-# Red Piezométrica CORPOCESAR — V3
+# Red Piezométrica CORPOCESAR — V4
 
 Dashboard web estático para consulta y seguimiento de la red piezométrica. Está preparado para publicación mediante **GitHub Pages + GitHub Actions**.
 
@@ -51,3 +51,15 @@ Primero publique y valide la URL `usuario.github.io/repositorio/`. Después conf
 ## Nota técnica
 
 El dashboard usa el Excel consolidado como fuente oficial. No se automatiza todavía la conversión directa de archivos RAW de sensores porque existen formatos diferentes y falta documentar completamente las reglas de transformación/compensación.
+
+
+## Documentación institucional
+
+- [Documento de Arquitectura de Software (SAD)](docs/SAD.md)
+- [Diccionario de datos](docs/DICCIONARIO_DATOS.md)
+- [Manual técnico](docs/MANUAL_TECNICO.md)
+- [Manual de usuario](docs/MANUAL_USUARIO.md)
+- [Matriz de cumplimiento](docs/MATRIZ_CUMPLIMIENTO.md)
+- [Política de seguridad](SECURITY.md)
+
+La documentación identifica expresamente los controles implementados y los puntos que todavía requieren decisión o validación institucional antes de declarar conformidad plena.
