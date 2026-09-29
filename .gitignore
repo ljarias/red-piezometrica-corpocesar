@@ -13,3 +13,6 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# Estado temporal usado para comparar una actualización local
+data/.update_baseline.json
