@@ -17,6 +17,10 @@ for required in [
     'role="tablist"',
     'role="tabpanel"',
     'aria-live="polite"',
+    'id="chartAltRows"',
+    'id="compareAlt"',
+    'id="levelAltRows"',
+    'aria-pressed="true"',
 ]:
     if required not in HTML:
         errors.append(f"Falta requisito accesible: {required}")
