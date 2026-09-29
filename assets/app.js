@@ -9,7 +9,24 @@ function opts(sel,vals,label='Todos'){const old=sel.value;sel.innerHTML=`<option
 function filteredMaster(){return master.filter(r=>(!$('fCuenca').value||r.cuenca===$('fCuenca').value)&&(!$('fEstacion').value||r.estacion_de_monitoreo===$('fEstacion').value)&&(!$('fPredio').value||r.predio===$('fPredio').value)&&(!$('fPiezo').value||r.piezometro===$('fPiezo').value))}
 function dateOK(m){const f=dateOnly(m.fecha);return(!$('fDesde').value||f>=$('fDesde').value)&&(!$('fHasta').value||f<=$('fHasta').value)}
 function cascade(){let a=master.filter(r=>!$('fCuenca').value||r.cuenca===$('fCuenca').value);opts($('fEstacion'),a.map(r=>r.estacion_de_monitoreo));a=a.filter(r=>!$('fEstacion').value||r.estacion_de_monitoreo===$('fEstacion').value);opts($('fPredio'),a.map(r=>r.predio));a=a.filter(r=>!$('fPredio').value||r.predio===$('fPredio').value);opts($('fPiezo'),a.map(r=>r.piezometro));render()}
-function init(){opts($('fCuenca'),master.map(r=>r.cuenca));opts($('fEstacion'),master.map(r=>r.estacion_de_monitoreo));opts($('fPredio'),master.map(r=>r.predio));opts($('fPiezo'),master.map(r=>r.piezometro));$('fDesde').value=dateOnly(meta.fecha_min);$('fHasta').value=dateOnly(meta.fecha_max);['fCuenca','fEstacion','fPredio'].forEach(id=>$(id).addEventListener('change',cascade));['fPiezo','fVariable','fDesde','fHasta'].forEach(id=>$(id).addEventListener('change',render));$('resetFilters').onclick=()=>{['fCuenca','fEstacion','fPredio','fPiezo'].forEach(id=>$(id).value='');$('fDesde').value=dateOnly(meta.fecha_min);$('fHasta').value=dateOnly(meta.fecha_max);cascade()};document.querySelectorAll('.comparemode button').forEach(b=>b.onclick=()=>{compareMode=b.dataset.mode;document.querySelectorAll('.comparemode button').forEach(x=>x.classList.toggle('active',x===b));renderCompare()});document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('hidden',x.id!==b.dataset.tab));setTimeout(()=>{restoreMapView(map);restoreMapView(basinMap);renderCharts()},90)});initMap();initBasinMap();$('updated').textContent=`${fmt(meta.fecha_min)} — ${fmt(meta.fecha_max)}`;render()}
+function init(){opts($('fCuenca'),master.map(r=>r.cuenca));opts($('fEstacion'),master.map(r=>r.estacion_de_monitoreo));opts($('fPredio'),master.map(r=>r.predio));opts($('fPiezo'),master.map(r=>r.piezometro));$('fDesde').value=dateOnly(meta.fecha_min);$('fHasta').value=dateOnly(meta.fecha_max);['fCuenca','fEstacion','fPredio'].forEach(id=>$(id).addEventListener('change',cascade));['fPiezo','fVariable','fDesde','fHasta'].forEach(id=>$(id).addEventListener('change',render));$('resetFilters').onclick=()=>{['fCuenca','fEstacion','fPredio','fPiezo'].forEach(id=>$(id).value='');$('fDesde').value=dateOnly(meta.fecha_min);$('fHasta').value=dateOnly(meta.fecha_max);cascade();$('a11yStatus').textContent='Filtros restablecidos'};document.querySelectorAll('.comparemode button').forEach(b=>b.onclick=()=>{compareMode=b.dataset.mode;document.querySelectorAll('.comparemode button').forEach(x=>x.classList.toggle('active',x===b));renderCompare()});const tabButtons=[...document.querySelectorAll('.tabs [role="tab"]')];
+const activateTab=b=>{
+ tabButtons.forEach(x=>{const active=x===b;x.classList.toggle('active',active);x.setAttribute('aria-selected',String(active));x.tabIndex=active?0:-1});
+ document.querySelectorAll('.tab').forEach(x=>{const active=x.id===b.dataset.tab;x.classList.toggle('hidden',!active);x.hidden=!active});
+ $('a11yStatus').textContent='Vista '+b.textContent+' activada';
+ setTimeout(()=>{restoreMapView(map);restoreMapView(basinMap);renderCharts()},90)
+};
+tabButtons.forEach((b,i)=>{
+ b.onclick=()=>activateTab(b);
+ b.addEventListener('keydown',e=>{
+  let next=null;
+  if(e.key==='ArrowRight')next=tabButtons[(i+1)%tabButtons.length];
+  if(e.key==='ArrowLeft')next=tabButtons[(i-1+tabButtons.length)%tabButtons.length];
+  if(e.key==='Home')next=tabButtons[0];
+  if(e.key==='End')next=tabButtons.at(-1);
+  if(next){e.preventDefault();next.focus();activateTab(next)}
+ })
+});initMap();initBasinMap();$('updated').textContent=`${fmt(meta.fecha_min)} — ${fmt(meta.fecha_max)}`;render()}
 function setupMap(id){
  const m=L.map(id,{zoomControl:false,preferCanvas:false}).setView([9.5,-73.5],10);
  const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19});
