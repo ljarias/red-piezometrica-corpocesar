@@ -31,6 +31,12 @@ jobs:
           python -m json.tool data/generated/quality.json > /dev/null
           python -m json.tool data/generated/meta.json > /dev/null
 
+      - name: Ejecutar pruebas de contrato
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Validar frontend
+        run: python scripts/validate_frontend.py
+
       - name: Validar privacidad del dataset público
         run: python scripts/validate_public_data.py
 
