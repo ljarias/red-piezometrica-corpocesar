@@ -45,7 +45,20 @@ read=read[read['piezometro'].notna() & read['fecha_muestreo'].notna()].copy()
 if 'serial_sensor' in master:
     master['serial_sensor']=master['serial_sensor'].apply(lambda x: None if pd.isna(x) else str(int(x)) if isinstance(x,(int,float)) and float(x).is_integer() else str(x))
 
-master_records=[{k:clean(v) for k,v in r.items()} for r in master.to_dict('records')]
+# Privacidad por diseño: solo estos campos pueden salir al dataset público.
+# Cualquier columna nueva del Excel queda privada por defecto hasta revisión explícita.
+PUBLIC_MASTER_FIELDS = [
+    'cuenca', 'departamento', 'municipio', 'estacion_de_monitoreo', 'piezometro',
+    'longitud', 'latitud', 'z', 'predio', 'fecha_construccion', 'profundidad',
+    'acuifero_monitoreado', 'nivel_estatico_base', 'nivel_estatico_msnm',
+    'profundidad_sensor', 'serial_sensor', 'muestreo',
+    'ficha', 'disenos_mecanicos', 'fotos', 'icon_ft', 'icon_dm', 'icon_foto'
+]
+public_master_cols = [c for c in PUBLIC_MASTER_FIELDS if c in master.columns]
+master_records=[
+    {k:clean(v) for k,v in r.items()}
+    for r in master[public_master_cols].to_dict('records')
+]
 measure_cols=['altura_columna_de_agua','nivel_estatico','temperatura','conductividad']
 measure_records=[]
 for r in read.sort_values(['piezometro','fecha_muestreo']).to_dict('records'):
