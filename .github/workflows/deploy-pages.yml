@@ -24,6 +24,13 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v6
 
+      - name: Validar sintaxis JSON
+        run: |
+          python -m json.tool data/generated/master.json > /dev/null
+          python -m json.tool data/generated/measurements.json > /dev/null
+          python -m json.tool data/generated/quality.json > /dev/null
+          python -m json.tool data/generated/meta.json > /dev/null
+
       - name: Validar privacidad del dataset público
         run: python scripts/validate_public_data.py
 
