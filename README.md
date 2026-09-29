@@ -60,6 +60,8 @@ El dashboard usa el Excel consolidado como fuente oficial. No se automatiza toda
 - [Manual técnico](docs/MANUAL_TECNICO.md)
 - [Manual de usuario](docs/MANUAL_USUARIO.md)
 - [Matriz de cumplimiento](docs/MATRIZ_CUMPLIMIENTO.md)
+- [Matriz de clasificación de información](docs/MATRIZ_CLASIFICACION_INFORMACION.md)
+- [Registro de publicación](docs/REGISTRO_PUBLICACION.md)
 - [Política de seguridad](SECURITY.md)
 
 La documentación identifica expresamente los controles implementados y los puntos que todavía requieren decisión o validación institucional antes de declarar conformidad plena.
