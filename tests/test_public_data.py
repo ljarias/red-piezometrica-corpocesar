@@ -49,6 +49,17 @@ class PublicDataContractTests(unittest.TestCase):
         self.assertEqual(self.meta.get("piezometros_maestro"), len(self.master))
         self.assertEqual(self.meta.get("registros"), len(self.measurements))
 
+    def test_measurement_dates_are_iso(self):
+        import re
+        pattern = re.compile(r"^\\d{4}-\\d{2}-\\d{2}$")
+        invalid = [r.get("fecha") for r in self.measurements if not pattern.match(str(r.get("fecha") or ""))]
+        self.assertEqual([], invalid[:10], f"Fechas no ISO detectadas: {invalid[:10]}")
+
+    def test_quality_references_master(self):
+        ids = {r["piezometro"] for r in self.master}
+        unknown = sorted({r.get("piezometro") for r in self.quality if r.get("piezometro") not in ids})
+        self.assertEqual([], unknown, f"Calidad con piezometro inexistente: {unknown}")
+
     def test_dates_are_not_reversed(self):
         self.assertLessEqual(self.meta.get("fecha_min"), self.meta.get("fecha_max"))
 
