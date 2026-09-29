@@ -1,5 +1,5 @@
 from pathlib import Path
-import pandas as pd, json, math, re, sys
+import pandas as pd, json, math, re, sys, hashlib
 ROOT=Path(__file__).resolve().parents[1]
 SRC=ROOT/'data/source/BaseDatos_red_piezometrica_SAC.xlsx'
 OUT=ROOT/'data/generated'; OUT.mkdir(parents=True,exist_ok=True)
@@ -83,8 +83,10 @@ for pid in sorted(master['piezometro'].dropna().unique()):
     state='ok' if comp>=90 and lag<=7 else ('incompleto' if comp>=60 else 'critico')
     quality.append({'piezometro':pid,'registros':len(g),'primera_lectura':first.date().isoformat(),'ultima_lectura':last.date().isoformat(),'esperados':expected,'completitud_pct':comp,'duplicados':dup,'nulos':nulls,'estado':state})
 
+source_sha256=hashlib.sha256(SRC.read_bytes()).hexdigest()
 meta={
- 'fuente':SRC.name,'generado':pd.Timestamp.now().isoformat(),'registros':len(read),
+ 'schema_version':'3.3', 'etl_version':'3.3.0',
+ 'fuente':SRC.name, 'fuente_sha256':source_sha256,'generado':pd.Timestamp.now().isoformat(),'registros':len(read),
  'piezometros_maestro':int(master['piezometro'].nunique()),'piezometros_con_datos':int(read['piezometro'].nunique()),
  'cuencas':int(master['cuenca'].nunique()),'estaciones':int(master['estacion_de_monitoreo'].nunique()),
  'municipios':int(master['municipio'].nunique()),'acuiferos':int(master['acuifero_monitoreado'].nunique()),
