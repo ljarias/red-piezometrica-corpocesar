@@ -2,8 +2,8 @@
 setlocal
 cd /d "%~dp0"
 echo ==============================================
-echo  Red Piezometrica - Actualizacion de datos
- echo ==============================================
+echo  Red Piezometrica - Actualizacion segura V3.3
+echo ==============================================
 if not exist "data\source\BaseDatos_red_piezometrica_SAC.xlsx" (
   echo [ERROR] No se encontro data\source\BaseDatos_red_piezometrica_SAC.xlsx
   pause
@@ -15,15 +15,43 @@ if errorlevel 1 (
   python -m pip install -r requirements.txt
   if errorlevel 1 goto :error
 )
-echo Procesando Excel...
+
+echo.
+echo [1/4] Capturando linea base publicada...
+python scripts\validate_update.py --snapshot
+if errorlevel 1 goto :error
+
+echo [2/4] Procesando nuevo Excel...
 python scripts\process_excel.py
 if errorlevel 1 goto :error
+
+echo [3/4] Validando privacidad del dataset publico...
+python scripts\validate_public_data.py
+if errorlevel 1 goto :error
+
+echo [4/4] Comparando contra la version anterior...
+python scripts\validate_update.py
+if errorlevel 1 goto :blocked
+
 echo.
-echo [OK] JSON regenerados en data\generated\
-echo Ahora revise el dashboard con run_local.bat y, si todo esta correcto,
-echo ejecute: git add data/generated ^&^& git commit -m "Actualizar datos" ^&^& git push
+echo [OK] Actualizacion procesada y controles bloqueantes superados.
+echo Revise data\generated\update_report.json y pruebe el dashboard con run_local.bat.
+echo Si el informe indica REQUIERE_REVISION, revise las advertencias antes de publicar.
+echo.
+echo Para publicar, despues de la revision:
+echo   git add data/generated scripts
+echo   git commit -m "Actualizar datos red piezometrica"
+echo   git push
 pause
 exit /b 0
+
+:blocked
+echo.
+echo [BLOQUEADO] Se detectaron cambios que requieren correccion o autorizacion.
+echo NO publique esta version. Revise data\generated\update_report.json
+pause
+exit /b 2
+
 :error
 echo.
 echo [ERROR] La actualizacion no pudo completarse. No publique hasta corregirla.
