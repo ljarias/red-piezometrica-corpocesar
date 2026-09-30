@@ -42,6 +42,20 @@ read['fecha_muestreo']=pd.to_datetime(read['fecha_muestreo'],errors='coerce')
 master=master[master['piezometro'].notna() & (master['piezometro'].str.len()>0)].copy()
 read=read[read['piezometro'].notna() & read['fecha_muestreo'].notna()].copy()
 
+# Integridad referencial y precondiciones: fallar de forma segura, no publicar artefactos ambiguos.
+if master.empty:
+    sys.exit('DATOS GENERALES: no hay piezómetros válidos después de la limpieza')
+if read.empty:
+    sys.exit('LECTURAS: no hay lecturas válidas después de la limpieza')
+if master['piezometro'].duplicated().any():
+    ids=sorted(master.loc[master['piezometro'].duplicated(keep=False),'piezometro'].astype(str).unique())
+    sys.exit('DATOS GENERALES: identificadores de piezómetro duplicados: '+', '.join(ids[:20]))
+master_ids=set(master['piezometro'].astype(str))
+read_ids=set(read['piezometro'].astype(str))
+orphans=sorted(read_ids-master_ids)
+if orphans:
+    sys.exit('LECTURAS: existen piezómetros sin registro maestro: '+', '.join(orphans[:20]))
+
 if 'serial_sensor' in master:
     master['serial_sensor']=master['serial_sensor'].apply(lambda x: None if pd.isna(x) else str(int(x)) if isinstance(x,(int,float)) and float(x).is_integer() else str(x))
 
@@ -85,7 +99,7 @@ for pid in sorted(master['piezometro'].dropna().unique()):
 
 source_sha256=hashlib.sha256(SRC.read_bytes()).hexdigest()
 meta={
- 'schema_version':'3.3', 'etl_version':'3.3.0',
+ 'schema_version':'3.3', 'etl_version':'3.3.1',
  'fuente':SRC.name, 'fuente_sha256':source_sha256,'generado':pd.Timestamp.now().isoformat(),'registros':len(read),
  'piezometros_maestro':int(master['piezometro'].nunique()),'piezometros_con_datos':int(read['piezometro'].nunique()),
  'cuencas':int(master['cuenca'].nunique()),'estaciones':int(master['estacion_de_monitoreo'].nunique()),
