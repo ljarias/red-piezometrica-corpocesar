@@ -95,10 +95,11 @@ def validate() -> int:
     if introduced_critical:
         warnings.append("Nuevos piezometros con calidad critica: " + ", ".join(introduced_critical))
 
-    status = "BLOQUEADO" if blockers else ("REQUIERE_REVISION" if warnings else "APTO_PARA_PUBLICAR")
+    status = "BLOQUEADO" if blockers else ("REQUIERE_REVISION" if warnings else "CONTROLES_AUTOMATICOS_OK")
     report = {
         "fecha_control": date.today().isoformat(),
         "estado": status,
+        "alcance_estado": "Resultado de controles automáticos técnicos; no constituye aprobación científica, jurídica ni autorización institucional de publicación.",
         "anterior": {
             "registros": old_count,
             "piezometros": len(old_ids),
