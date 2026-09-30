@@ -76,6 +76,26 @@ if "script-src 'self' 'unsafe-inline'" in HTML:
 if "script-src 'self' 'unsafe-eval'" in HTML:
     errors.append("CSP no debe permitir unsafe-eval para scripts.")
 
+
+# V4.1: controles estáticos adicionales de reflow y accesibilidad.
+for required_css in (
+    ":focus-visible",
+    "prefers-reduced-motion:reduce",
+    "text-size-adjust:100%",
+    "min-height:44px",
+):
+    if required_css not in CSS:
+        errors.append(f"Falta control CSS de accesibilidad: {required_css}")
+
+for required_semantic in (
+    'role="status"',
+    'aria-atomic="true"',
+    '<caption>Datos de la serie temporal seleccionada</caption>',
+    '<caption>Datos de nivel piezométrico</caption>',
+):
+    if required_semantic not in HTML:
+        errors.append(f"Falta control semantico de accesibilidad: {required_semantic}")
+
 if errors:
     raise SystemExit("ERROR FRONTEND:\n- " + "\n- ".join(errors))
 
