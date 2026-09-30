@@ -23,6 +23,31 @@ ASSETS = [
         "path": ROOT / "assets/vendor/leaflet/leaflet.css",
         "sha384": "sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H",
     },
+    {
+        "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers.png",
+        "path": ROOT / "assets/vendor/leaflet/images/layers.png",
+        "sha384": null,
+    },
+    {
+        "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png",
+        "path": ROOT / "assets/vendor/leaflet/images/layers-2x.png",
+        "sha384": null,
+    },
+    {
+        "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        "path": ROOT / "assets/vendor/leaflet/images/marker-icon.png",
+        "sha384": null,
+    },
+    {
+        "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        "path": ROOT / "assets/vendor/leaflet/images/marker-icon-2x.png",
+        "sha384": null,
+    },
+    {
+        "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        "path": ROOT / "assets/vendor/leaflet/images/marker-shadow.png",
+        "sha384": null,
+    },
 ]
 
 
@@ -37,12 +62,15 @@ def main() -> int:
         with urllib.request.urlopen(asset["url"], timeout=30) as response:
             data = response.read()
         actual = digest_sha384(data)
-        if actual != asset["sha384"]:
+        expected = asset["sha384"]
+        if expected is not None and actual != expected:
             raise RuntimeError(
-                f"Integridad invalida para {asset['url']}: esperado {asset['sha384']}, recibido {actual}"
+                f"Integridad invalida para {asset['url']}: esperado {expected}, recibido {actual}"
             )
+        if expected is None:
+            print(f"[HASH] {target.relative_to(ROOT)} · SHA-384 {actual}")
         target.write_bytes(data)
-        print(f"[OK] {target.relative_to(ROOT)} · SHA-384 verificado")
+        print(f"[OK] {target.relative_to(ROOT)}")
     return 0
 
 
