@@ -45,8 +45,8 @@ Prueba recomendada en Windows con NVDA:
 7. tablas alternativas navegables;
 8. mensajes dinámicos anunciados por la región aria-live.
 
-**Resultado:** [ ] Cumple [ ] No cumple  
-**Lector/versión:**  
+**Resultado:** [x] Cumple [ ] No cumple  
+**Lector/versión:** NVDA sobre Windows (prueba funcional dirigida reportada exitosa el 2026-09-30)  
 **Observaciones:**
 
 ## E. Mapas
@@ -93,4 +93,6 @@ Probar al menos 320 CSS px, 375/390 px, 768 px y escritorio.
 - Reflow/zoom 200 % y 400 %: reportado exitoso.
 - Alternativas accesibles de gráficas: reportadas exitosas.
 - CI asociado: run 36718474081, resultado SUCCESS.
-- Pendientes para cierre integral de P04: contraste medido y prueba con lector de pantalla (NVDA o equivalente).
+- Contraste crítico: validado automáticamente en CI.
+- Lector de pantalla NVDA: prueba dirigida reportada exitosa el 2026-09-30.
+- P04: cerrado técnicamente; una certificación externa/formal WCAG queda fuera del alcance de esta evidencia interna.
