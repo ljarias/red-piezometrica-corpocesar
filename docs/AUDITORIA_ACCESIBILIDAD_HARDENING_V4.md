@@ -19,7 +19,7 @@
 | Mapas | región etiquetada + alternativa textual/listado | Implementado parcialmente |
 | Comparación | aria-pressed | Implementado |
 | Responsive | breakpoints y tablas desplazables | Implementado |
-| Contraste integral | requiere medición sistemática de todos los estados | Pendiente evidencia |
+| Contraste de combinaciones críticas de la paleta | medición reproducible WCAG mediante scripts/validate_contrast.py | Implementado; CI bloqueante |
 | Zoom/reflow 200–400 % | requiere prueba manual | Pendiente evidencia |
 | Lector de pantalla | requiere prueba NVDA/VoiceOver | Pendiente evidencia |
 | Teclado completo Leaflet | requiere prueba manual del componente | Pendiente evidencia |
@@ -43,3 +43,7 @@ Los mapas base permanecen necesariamente sujetos a servicios externos mientras s
 ## Riesgo residual
 
 El proyecto tiene controles de accesibilidad significativamente superiores a la línea base, pero no debe declararse conformidad WCAG 2.1 AA hasta completar pruebas manuales de contraste, zoom/reflow, lector de pantalla y teclado en mapas.
+
+
+## Medición de contraste 2026-09-30
+Se incorporó una comprobación reproducible de las combinaciones críticas de primer plano/fondo usadas por el dashboard, con umbral conservador 4.5:1. Se corrigieron previamente texto secundario, eyebrow, footer y pestaña activa. El control se ejecuta en CI antes del despliegue. Esta medición no sustituye la revisión visual de estados generados por componentes de terceros ni la prueba con lector de pantalla.
