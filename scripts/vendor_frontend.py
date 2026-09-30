@@ -26,7 +26,7 @@ ASSETS = [
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers.png",
-        "sha384": "80x85ZS+G189o0xL8E8D7BnfhuhNss6EwUPHzG7e+qByRD2xnpxikZ6UQU4Re5nNy",
+        "sha384": "80x85ZS+G189o0xL8E8D7BnfhuNss6EwUPHzG7e+qByRD2xnpxikZ6UQU4Re5nNy",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png",
