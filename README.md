@@ -62,6 +62,8 @@ El dashboard usa el Excel consolidado como fuente oficial. No se automatiza toda
 - [Matriz de cumplimiento](docs/MATRIZ_CUMPLIMIENTO.md)
 - [Matriz de clasificación de información](docs/MATRIZ_CLASIFICACION_INFORMACION.md)
 - [Registro de publicación](docs/REGISTRO_PUBLICACION.md)
+- [Procedimiento de incidentes y continuidad](docs/PROCEDIMIENTO_INCIDENTES_CONTINUIDAD.md)
+- [Checklist de liberación](docs/CHECKLIST_LIBERACION.md)
 - [Informe de cierre de auditoría V4](docs/INFORME_CIERRE_AUDITORIA_V4.md)
 - [Plan de pendientes V4](docs/PLAN_PENDIENTES_V4.md)
 - [Política de seguridad](SECURITY.md)
