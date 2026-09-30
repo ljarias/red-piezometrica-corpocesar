@@ -1,0 +1,31 @@
+{
+  "fecha_control": "2026-09-30",
+  "estado": "APTO_PARA_PUBLICAR",
+  "anterior": {
+    "registros": 7193,
+    "piezometros": 23,
+    "fecha_min": "2024-09-25",
+    "fecha_max": "2025-03-26"
+  },
+  "nuevo": {
+    "registros": 7193,
+    "piezometros": 23,
+    "fecha_min": "2024-09-25",
+    "fecha_max": "2025-03-26"
+  },
+  "diferencias": {
+    "lecturas": 0,
+    "piezometros_nuevos": [],
+    "piezometros_eliminados": [],
+    "duplicados": 0,
+    "nulos": 0,
+    "sin_datos_nuevos": [],
+    "sin_datos_persistentes": [
+      "SA-06A"
+    ],
+    "criticos_nuevos": [],
+    "criticos_persistentes": []
+  },
+  "bloqueos": [],
+  "advertencias": []
+}
