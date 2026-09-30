@@ -45,6 +45,9 @@ jobs:
       - name: Validar contraste WCAG
         run: python scripts/validate_contrast.py
 
+      - name: Validar hardening XSS y URLs
+        run: python scripts/validate_security_frontend.py
+
       - name: Validar privacidad del dataset público
         run: python scripts/validate_public_data.py
 
