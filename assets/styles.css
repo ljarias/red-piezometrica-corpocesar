@@ -57,3 +57,22 @@ html{overflow-x:hidden}body{min-width:0}.brand-main,.brand-main>div,.cardhead>di
 .chart-alt caption{text-align:left;font-weight:800;padding:7px;color:var(--blue2)}
 .chart-alt-content{padding:8px 2px;color:var(--text);font-size:12px;line-height:1.55}
 .chart-alt-content ul{margin:0;padding-left:20px}
+
+
+/* V4.1 · reflow y accesibilidad para ampliación de texto/zoom */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{line-height:1.5}
+button,select,input{font:inherit}
+a{overflow-wrap:anywhere}
+@media(max-width:500px){
+  .brand-main{flex-wrap:wrap}
+  .corp-logo{max-width:100%;height:auto}
+  .filterbar{grid-template-columns:minmax(0,1fr)}
+  .kpis,.kpis.compact,.facts,.statgrid,.quality-summary{grid-template-columns:minmax(0,1fr)}
+  .cardhead{display:block}
+  .comparemode{margin-top:8px}
+  .comparemode button{min-height:44px}
+  .tabs button{min-height:44px}
+  .filterbar select,.filterbar input{min-height:44px}
+  .doclinks a{min-height:44px}
+}
