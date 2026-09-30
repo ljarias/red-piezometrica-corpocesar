@@ -6,7 +6,7 @@ Este documento define el control mínimo de cada liberación pública. Debe dili
 
 | Versión | Fecha | Fuente | Periodo de datos | Registros | Piezómetros | Commit | Resultado CI | Responsable de revisión | Observaciones |
 |---|---|---|---|---:|---:|---|---|---|---|
-| V4 | Pendiente cierre | Excel consolidado institucional | 2024-09-25 a 2025-03-26 | 7193 | 23 | Consultar historial Git | Validación automatizada habilitada | Pendiente designación CORPOCESAR | Línea base documental |
+| V4 / ETL 3.3 | 2026-09-30 | BaseDatos_red_piezometrica_SAC.xlsx | 2024-09-25 a 2025-03-26 | 7193 | 23 | 8412f76 (datos) / 4706d1e (corrección CI) | SUCCESS · run 36715664963 | Pendiente designación CORPOCESAR | update_report: APTO_PARA_PUBLICAR; 22 piezómetros con datos; SA-06A condición histórica sin datos |
 
 ## Evidencias mínimas por liberación
 
