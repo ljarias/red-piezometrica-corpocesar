@@ -13,19 +13,19 @@
 6. Abrir “Ver datos de la gráfica en tabla” con teclado.
 7. Comprobar que el foco siempre sea visible y que no exista trampa de teclado.
 
-**Resultado:** [ ] Cumple [ ] No cumple  
-**Observaciones:** 
+**Resultado:** [x] Cumple [ ] No cumple  
+**Observaciones:** Prueba manual reportada exitosa el 2026-09-30.
 
 ## B. Zoom y reflow
 Realizar en navegador de escritorio:
-- 200 %: [ ] sin pérdida de información/controles
-- 400 %: [ ] contenido principal utilizable sin desplazamiento horizontal global
+- 200 %: [x] sin pérdida de información/controles
+- 400 %: [x] contenido principal utilizable sin desplazamiento horizontal global
 - comprobar filtros, tarjetas, pestañas, tablas, gráficas y mapas.
 
 Se admite desplazamiento interno en tablas extensas cuando es necesario para preservar su estructura.
 
-**Resultado:** [ ] Cumple [ ] No cumple  
-**Observaciones:**
+**Resultado:** [x] Cumple [ ] No cumple  
+**Observaciones:** Prueba manual reportada exitosa el 2026-09-30.
 
 ## C. Contraste y estados
 Verificar texto normal, encabezados, botones, enlaces, foco, estados de calidad y textos sobre fondos coloreados. Registrar cualquier combinación que no alcance el contraste aplicable.
@@ -60,9 +60,9 @@ Prueba recomendada en Windows con NVDA:
 **Observaciones:**
 
 ## F. Gráficas
-- [ ] Variable seleccionada tiene tabla equivalente.
-- [ ] Comparación tiene resumen textual.
-- [ ] Nivel piezométrico tiene tabla equivalente.
+- [x] Variable seleccionada tiene tabla equivalente.
+- [x] Comparación tiene resumen textual.
+- [x] Nivel piezométrico tiene tabla equivalente.
 - [ ] La información esencial no depende exclusivamente del color.
 
 **Resultado:** [ ] Cumple [ ] No cumple  
@@ -86,3 +86,11 @@ Probar al menos 320 CSS px, 375/390 px, 768 px y escritorio.
 **Resultado global:** [ ] Aprobado [ ] Aprobado con observaciones [ ] No aprobado  
 **Incidencias asociadas:**  
 **Firma/aprobación institucional:** pendiente.
+
+
+## Evidencia de ejecución 2026-09-30
+- Navegación por teclado: reportada exitosa.
+- Reflow/zoom 200 % y 400 %: reportado exitoso.
+- Alternativas accesibles de gráficas: reportadas exitosas.
+- CI asociado: run 36718474081, resultado SUCCESS.
+- Pendientes para cierre integral de P04: contraste medido y prueba con lector de pantalla (NVDA o equivalente).
