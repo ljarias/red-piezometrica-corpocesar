@@ -26,27 +26,27 @@ ASSETS = [
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers.png",
-        "sha384": None,
+        "sha384": "80x85ZS+G189o0xL8E8D7BnfhuhNss6EwUPHzG7e+qByRD2xnpxikZ6UQU4Re5nNy",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers-2x.png",
-        "sha384": None,
+        "sha384": "+F2ZWK/HTpkV9kN2HnMGCQOTM/cnQJLs770FLOeHznwWRfDESI8z4JwcGYmy2Au",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-icon.png",
-        "sha384": None,
+        "sha384": "wg83fCOXjBtqzFAWhTL9Sd9vmLUNhfEEzfmNUX9zwv2igKlz/YQbdapF4ObdxF+R",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-icon-2x.png",
-        "sha384": None,
+        "sha384": "bDEa1RhAAKIr/VQnMZ7gUhhXwmKYB4V0g8AsxOvCEPwgxfHCUEzAEMAEEzkjuxiA",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-shadow.png",
-        "sha384": None,
+        "sha384": "dB8ivfvPGb1MSIzX8oWTakCxmg+VwqP/QL1TX4jT4INR3pM5T4FgF3Gx4mN3NTMg",
     },
 ]
 
