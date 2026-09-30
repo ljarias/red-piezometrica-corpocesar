@@ -49,6 +49,15 @@ class PublicDataContractTests(unittest.TestCase):
         self.assertEqual(self.meta.get("piezometros_maestro"), len(self.master))
         self.assertEqual(self.meta.get("registros"), len(self.measurements))
 
+    def test_v33_manifest_when_present(self):
+        schema = self.meta.get("schema_version")
+        if schema is None:
+            self.skipTest("Manifiesto legado: se actualizará en la próxima regeneración oficial.")
+        self.assertEqual("3.3", schema)
+        self.assertEqual("3.3.0", self.meta.get("etl_version"))
+        digest = str(self.meta.get("fuente_sha256") or "")
+        self.assertRegex(digest, r"^[0-9a-f]{64}$")
+
     def test_measurement_dates_are_iso(self):
         import re
         pattern = re.compile(r"^\\d{4}-\\d{2}-\\d{2}$")
