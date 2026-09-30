@@ -31,7 +31,7 @@ ASSETS = [
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers-2x.png",
-        "sha384": "+F2ZWK/HTpkV9kN2HnMGCQOTM/cnQJLs770FLOeHznwWRfDESI8z4JwcGYmy2Au",
+        "sha384": "+F2ZWK/HTpkV9kN2HnMGCQOTM/cnQJLs770FLOeHznwVWRfDESI8z4JwcGYmy2Au",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -41,12 +41,12 @@ ASSETS = [
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-icon-2x.png",
-        "sha384": "bDEa1RhAAKIr/VQnMZ7gUhhXwmKYB4V0g8AsxOvCEPwgxfHCUEzAEMAEEzkjuxiA",
+        "sha384": "bDEa1RhAAKIr/VQnMZ7gUhhXwmKYB4V0g8AsxOvCEPwGxfHCUEzAEMAEEzkjuxiA",
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-shadow.png",
-        "sha384": "dB8ivfvPGb1MSIzX8oWTakCxmg+VwqP/QL1TX4jT4INR3pM5T4FgF3Gx4mN3NTMg",
+        "sha384": "dB8ivfvPGb1MSIzX8oWTakCxmq+VwqP/QL1TX4jT4INR3pM5T4FgF3Gx4mN3NTMq",
     },
 ]
 
