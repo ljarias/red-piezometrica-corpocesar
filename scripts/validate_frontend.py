@@ -66,7 +66,6 @@ for required_csp in (
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "frame-ancestors 'none'",
 ):
     if required_csp not in HTML:
         errors.append(f"Falta directiva CSP requerida: {required_csp}")
@@ -95,6 +94,13 @@ for required_semantic in (
 ):
     if required_semantic not in HTML:
         errors.append(f"Falta control semantico de accesibilidad: {required_semantic}")
+
+# Hardening XSS: exigir escape de texto, validacion de URL y opciones construidas con DOM.
+for required_js in ("const esc=", "const safeUrl=", ".replaceChildren()"):
+    if required_js not in APP:
+        errors.append(f"Falta control XSS frontend: {required_js}")
+
+# Nota: frame-ancestors no es un control efectivo cuando CSP se entrega mediante meta.
 
 if errors:
     raise SystemExit("ERROR FRONTEND:\n- " + "\n- ".join(errors))
