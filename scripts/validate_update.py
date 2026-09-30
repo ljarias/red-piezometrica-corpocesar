@@ -70,18 +70,30 @@ def validate() -> int:
     if added:
         warnings.append("Piezometros nuevos: " + ", ".join(added))
 
+    old_quality = old.get("quality", {})
     duplicates = sum(int(q.get("duplicados") or 0) for q in new_quality)
     nulls = sum(int(q.get("nulos") or 0) for q in new_quality)
-    no_data = sorted(q.get("piezometro") for q in new_quality if q.get("estado") == "sin_datos")
-    critical = sorted(q.get("piezometro") for q in new_quality if q.get("estado") == "critico")
-    if duplicates:
-        warnings.append(f"Se detectaron {duplicates} filas duplicadas.")
-    if nulls:
-        warnings.append(f"Se detectaron {nulls} valores nulos en variables de medicion.")
-    if no_data:
-        warnings.append("Piezometros sin datos: " + ", ".join(no_data))
-    if critical:
-        warnings.append("Piezometros con calidad critica: " + ", ".join(critical))
+    old_duplicates = sum(int(q.get("duplicados") or 0) for q in old_quality.values())
+    old_nulls = sum(int(q.get("nulos") or 0) for q in old_quality.values())
+
+    old_no_data = {pid for pid, q in old_quality.items() if q.get("estado") == "sin_datos"}
+    new_no_data = {q.get("piezometro") for q in new_quality if q.get("estado") == "sin_datos" and q.get("piezometro")}
+    old_critical = {pid for pid, q in old_quality.items() if q.get("estado") == "critico"}
+    new_critical = {q.get("piezometro") for q in new_quality if q.get("estado") == "critico" and q.get("piezometro")}
+
+    introduced_no_data = sorted(new_no_data - old_no_data)
+    introduced_critical = sorted(new_critical - old_critical)
+    persistent_no_data = sorted(new_no_data & old_no_data)
+    persistent_critical = sorted(new_critical & old_critical)
+
+    if duplicates > old_duplicates:
+        warnings.append(f"Los duplicados aumentaron de {old_duplicates} a {duplicates}.")
+    if nulls > old_nulls:
+        warnings.append(f"Los valores nulos aumentaron de {old_nulls} a {nulls}.")
+    if introduced_no_data:
+        warnings.append("Nuevos piezometros sin datos: " + ", ".join(introduced_no_data))
+    if introduced_critical:
+        warnings.append("Nuevos piezometros con calidad critica: " + ", ".join(introduced_critical))
 
     status = "BLOQUEADO" if blockers else ("REQUIERE_REVISION" if warnings else "APTO_PARA_PUBLICAR")
     report = {
@@ -105,6 +117,10 @@ def validate() -> int:
             "piezometros_eliminados": removed,
             "duplicados": duplicates,
             "nulos": nulls,
+            "sin_datos_nuevos": introduced_no_data,
+            "sin_datos_persistentes": persistent_no_data,
+            "criticos_nuevos": introduced_critical,
+            "criticos_persistentes": persistent_critical,
         },
         "bloqueos": blockers,
         "advertencias": warnings,
