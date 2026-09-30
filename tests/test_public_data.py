@@ -60,7 +60,7 @@ class PublicDataContractTests(unittest.TestCase):
 
     def test_measurement_dates_are_iso(self):
         import re
-        pattern = re.compile(r"^\\d{4}-\\d{2}-\\d{2}$")
+        pattern = re.compile(r"^\d{4}-\d{2}-\d{2}$")
         invalid = [r.get("fecha") for r in self.measurements if not pattern.match(str(r.get("fecha") or ""))]
         self.assertEqual([], invalid[:10], f"Fechas no ISO detectadas: {invalid[:10]}")
 
