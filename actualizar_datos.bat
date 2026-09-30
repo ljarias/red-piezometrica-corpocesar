@@ -36,7 +36,7 @@ if errorlevel 1 goto :blocked
 echo.
 echo [OK] Actualizacion procesada y controles bloqueantes superados.
 echo Revise data\generated\update_report.json y pruebe el dashboard con run_local.bat.
-echo Si el informe indica REQUIERE_REVISION, revise las advertencias antes de publicar.
+echo Si el informe indica CONTROLES_AUTOMATICOS_OK, aun requiere revision y autorizacion institucional antes de publicar.\necho Si indica REQUIERE_REVISION, revise ademas las advertencias.
 echo.
 echo Para publicar, despues de la revision:
 echo   git add data/generated scripts
