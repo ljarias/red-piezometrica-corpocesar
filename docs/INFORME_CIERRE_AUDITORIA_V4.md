@@ -1,75 +1,86 @@
-# Informe de cierre de auditoría V4 — Red Piezométrica CORPOCESAR
+# Informe consolidado de auditoría V4 — Red Piezométrica CORPOCESAR
 
-**Estado:** candidata técnica condicionada para institucionalización.  
-**Alcance:** arquitectura, privacidad, accesibilidad, integridad de datos, seguridad, CI/CD, trazabilidad y documentación.  
-**Criterio:** un control implementado no equivale por sí mismo a certificación jurídica, de seguridad o de accesibilidad.
+**Fecha de corte:** 2026-09-30  
+**Estado:** controles técnicos V4 implementados; cierre institucional condicionado.  
+**Alcance:** arquitectura, privacidad, accesibilidad, integridad de datos, seguridad frontend, cadena de suministro, CI/CD, trazabilidad y documentación.
+
+> Un control técnico exitoso no constituye por sí mismo aprobación científica, jurídica, de datos abiertos ni autorización institucional de publicación.
 
 ## 1. Resumen ejecutivo
 
-La versión inicial era funcional, pero presentaba riesgos relevantes de publicación de información no minimizada, accesibilidad incompleta, dependencia de validaciones manuales, ausencia de pruebas automatizadas y documentación institucional insuficiente.
+La V4 evolucionó desde un dashboard funcional hacia una solución estática con controles preventivos y detectivos automatizados. El Excel institucional permanece fuera del repositorio público; el ETL publica mediante lista blanca; las actualizaciones se comparan con línea base; se incorporan SHA-256 de fuente, guardas de integridad referencial, validación de privacidad, allowlist HTTPS, hardening XSS, CSP compatible con GitHub Pages, dependencias verificadas por SHA-384, Actions fijadas por SHA, pruebas de accesibilidad y CI/CD bloqueante.
 
-La V4 incorpora privacidad por diseño, lista blanca de campos públicos, controles de URLs, navegación accesible, pruebas de contrato, validación estática del frontend, comparación segura de actualizaciones, hash de fuente, CI/CD bloqueante y un paquete documental institucional.
+El último pipeline de consolidación técnica disponible al corte terminó en **SUCCESS**. Los pendientes principales requieren decisiones de CORPOCESAR/NaturalSIG o validación hidrogeológica.
 
-No se recomienda declarar todavía cumplimiento integral. Permanecen decisiones que requieren aprobación de CORPOCESAR y validaciones técnicas especializadas.
+## 2. Estado consolidado de hallazgos
 
-## 2. Comparativo de hallazgos
+| Hallazgo | Acción V4 | Estado | Riesgo residual |
+|---|---|---|---|
+| Publicación excesiva desde Excel | Excel excluido + whitelist pública | Cerrado técnicamente | Bajo |
+| Campos personales/no necesarios | Eliminados y bloqueados en CI | Cerrado técnicamente | Bajo |
+| Clasificación de coordenadas, predio, seriales y documentos | Matriz creada | Pendiente institucional | Alto |
+| Accesibilidad | teclado, foco, reflow 200/400 %, contraste CI, NVDA, alternativas tabulares | Cerrado técnicamente | Bajo/medio |
+| Gráficas sin equivalente | tablas/resúmenes accesibles | Cerrado técnicamente | Bajo |
+| Dependencias frontend/Actions | versiones fijadas, SHA-384 y SHA exactos | Cerrado técnicamente | Bajo |
+| URLs dinámicas | HTTPS + allowlist + safeUrl | Cerrado técnicamente | Bajo |
+| XSS por HTML dinámico | escape de texto, DOM seguro y prueba CI | Hardening implementado | Bajo |
+| Integridad ETL | fuentes vacías, IDs duplicados y lecturas huérfanas bloqueadas | Cerrado técnicamente | Bajo |
+| Trazabilidad de fuente | SHA-256 + versión ETL | Cerrado técnicamente | Bajo |
+| Aprobación automática ambigua | CONTROLES_AUTOMATICOS_OK + alcance explícito | Corregido | Bajo |
+| Fórmula de nivel absoluto | documentada | Pendiente hidrogeología | Alto |
+| Rangos de plausibilidad | no inventados desde software | Pendiente hidrogeología | Alto |
+| Muestreo 12 h sin hora en Excel | limitación documentada | Mitigado | Medio |
+| Gobierno de publicación | procedimiento/registro creados | Pendiente responsables | Medio/alto |
+| Licencias de terceros | THIRD_PARTY_NOTICES.md | Documentado | Bajo |
 
-| Hallazgo inicial | Criticidad inicial | Acción V4 | Estado | Riesgo residual |
-|---|---|---|---|---|
-| Excel institucional podía inducir publicación excesiva | Crítica | Excel fuera de Git + lista blanca | Corregido | Bajo |
-| propietario y otros campos innecesarios en JSON | Crítica | Eliminados y bloqueados en CI | Corregido | Bajo |
-| Documentos públicos sin clasificación formal | Crítica | Matriz de clasificación | Parcial | Alto hasta decisión institucional |
-| WCAG sin controles suficientes | Alta | ARIA, teclado, labels, foco, skip-link, reduced-motion | Parcial avanzado | Medio |
-| Gráficas sin equivalente completo | Alta | Etiquetas accesibles; alternativa completa pendiente | Parcial | Medio |
-| Mapa como componente visual | Alta | Región accesible + alternativa textual existente | Parcial avanzado | Bajo/medio |
-| Dependencias externas | Alta | Documentadas y controladas parcialmente | Parcial | Medio |
-| URLs procedentes de datos sin allowlist | Alta | HTTPS + dominios autorizados | Corregido | Bajo |
-| Ausencia de pruebas automatizadas | Alta | unittest + validadores CI | Corregido | Bajo/medio |
-| Actualizaciones podían reducir datos sin advertencia | Alta | Comparación y bloqueo | Corregido | Bajo |
-| Sin trazabilidad fuerte de fuente | Media | SHA-256 + versión ETL | Corregido al regenerar con V3.3+ | Bajo |
-| Fórmula hidrogeológica sin validación formal | Alta | Documentada como riesgo | Pendiente especialista | Alto |
-| Muestreo 12 h sin hora en Excel | Alta | Limitación documentada | Mitigado, no resuelto | Medio |
-| Manual técnico insuficiente | Alta | Manual técnico V4 | Corregido | Bajo |
-| Manual de usuario ausente | Media | Manual de usuario V4 | Corregido | Bajo |
-| Clasificación de información inexistente | Crítica | Matriz y registro de decisión | Parcial | Alto hasta aprobación |
-| Registro de publicaciones inexistente | Media | Registro formal creado | Corregido estructuralmente | Bajo |
-| Rollback no formalizado | Media | Procedimiento Git documentado | Corregido | Bajo |
+## 3. Marco normativo y evidencia
 
-## 3. Riesgos residuales prioritarios
+### Ley 1581 de 2012
+La arquitectura aplica minimización y privacidad por diseño: el archivo fuente no se publica, existe whitelist de campos y el CI bloquea campos prohibidos. La decisión sobre si coordenadas, predio, seriales, fichas y fotografías pueden divulgarse permanece sujeta a clasificación institucional y análisis del contexto de identificación.
 
-### R1 — Clasificación institucional
-**Nivel:** Alto.  
-Coordenadas exactas, predio, seriales, fichas, diseños y fotografías requieren decisión institucional documentada.
+### Resolución MinTIC 1519 de 2020
+Se implementaron controles técnicos de accesibilidad WCAG 2.1 AA: navegación por teclado, foco visible, reflow/zoom, contraste, lector de pantalla NVDA y equivalentes textuales/tabulares. También existen controles de seguridad digital. El cierre técnico interno no se presenta como certificación externa.
 
-### R2 — Validación hidrogeológica
-**Nivel:** Alto.  
-La relación usada para nivel absoluto y los límites de plausibilidad deben ser aprobados por profesional competente. No deben inventarse umbrales desde desarrollo.
+### Ley 1712 de 2014
+El proyecto favorece disponibilidad y acceso electrónico a información pública, pero la apertura formal y reutilización requieren que la entidad defina clasificación, licencia y condiciones de publicación.
 
-### R3 — Conformidad WCAG integral
-**Nivel:** Medio.  
-Los controles base están implementados, pero falta evaluación completa con herramientas y pruebas manuales, incluyendo equivalentes de gráficas.
+### Decreto 1078 de 2015
+Se implementa defensa en profundidad para confidencialidad, integridad y disponibilidad: privacidad por diseño, validaciones de integridad, CI/CD, trazabilidad, procedimiento de incidentes, dependencias verificadas y controles de seguridad del frontend.
 
-### R4 — Cadena de suministro
-**Nivel:** Medio.  
-Chart.js, Leaflet, mapas y GitHub Actions mantienen dependencias externas. Se recomienda continuar con versionado local cuando sea viable y fijación verificable de Actions.
+## 4. Seguridad y cadena de suministro
 
-### R5 — Gobierno operativo
-**Nivel:** Medio.  
-Debe designarse formalmente quién aprueba publicaciones, atiende incidentes, valida datos y autoriza excepciones.
+Controles implementados:
+- CSP compatible con despliegue estático.
+- `frame-ancestors` no se contabiliza como protección porque CSP se entrega mediante `meta`.
+- Escape de texto dinámico y validación de URLs.
+- `noopener noreferrer` en enlaces externos.
+- Chart.js y Leaflet vendorizados durante build con SHA-384.
+- GitHub Actions fijadas a SHA exacto.
+- CI bloquea regresiones de privacidad, frontend, contraste, XSS/URLs, datos y dependencias.
 
-## 4. Criterios para producción institucional
+Limitación residual: GitHub Pages no ofrece en este proyecto el mismo control de encabezados HTTP que un servidor Apache administrado. Una migración futura a infraestructura institucional permitiría HSTS, X-Frame-Options/frame-ancestors vía header, Referrer-Policy y otros encabezados gestionados en servidor.
 
-La solución puede considerarse candidata técnica cuando el pipeline permanezca exitoso y no existan bloqueos de datos. Para cierre institucional se requieren, como mínimo:
+## 5. Evidencia de accesibilidad
 
-1. decisión firmada de clasificación de los campos/documentos pendientes;
-2. validación hidrogeológica de fórmulas y reglas de plausibilidad;
-3. auditoría final de accesibilidad con evidencias;
-4. designación de responsables de datos, publicación, seguridad y operación;
-5. definición de licencia/reutilización y tratamiento como datos abiertos cuando aplique;
-6. aprobación del paquete documental.
+P04 queda **cerrado técnicamente** al 2026-09-30 con evidencia de teclado, foco, navegación de pestañas, zoom/reflow 200 % y 400 %, contraste automatizado y prueba dirigida exitosa con NVDA. P05, equivalentes tabulares/textuales de las visualizaciones, también está cerrado técnicamente.
 
-## 5. Conclusión de auditoría
+Esto no se declara como certificación independiente de conformidad WCAG.
 
-La V4 reduce de forma sustancial los riesgos críticos identificados en la versión inicial y transforma el proyecto de un dashboard funcional a una solución con controles de ingeniería y gobierno. Los riesgos residuales de mayor importancia ya no dependen principalmente de programación: corresponden a clasificación institucional, validación hidrogeológica, accesibilidad integral y gobierno operativo.
+## 6. Pendientes que bloquean el cierre institucional
 
-Por tanto, el estado recomendado es **candidata técnica condicionada**, no “cumplimiento total” ni “producción institucional definitiva”.
+1. **P01:** aprobar clasificación de coordenadas, predio, seriales, fichas, diseños y fotografías.
+2. **P02:** validar científicamente la fórmula de nivel absoluto.
+3. **P03:** definir rangos hidrogeológicos de plausibilidad.
+4. **P06:** designar responsable de publicación/aprobación.
+5. **P07:** definir licencia y condiciones de reutilización.
+6. **P09:** asignar responsables al procedimiento de incidentes y continuidad.
+7. **P10:** aprobar formalmente SAD, manuales y matrices.
+8. **P12:** completar responsable y aprobación del registro de liberación.
+
+## 7. Criterio de liberación
+
+`CONTROLES_AUTOMATICOS_OK` significa únicamente que los controles técnicos automatizados no encontraron bloqueos. Antes de publicar una actualización deben existir revisión de los resultados, atención de advertencias, prueba funcional y autorización conforme al gobierno definido por la entidad.
+
+## 8. Conclusión
+
+La deuda técnica crítica identificada en la auditoría inicial se ha reducido sustancialmente. Los controles de desarrollo, accesibilidad, integridad, privacidad preventiva, seguridad frontend y cadena de suministro están implementados y automatizados. El proyecto puede mantenerse como **candidato técnico controlado**, mientras que la declaración de producción institucional definitiva depende de las decisiones y validaciones enumeradas en la sección 6.
