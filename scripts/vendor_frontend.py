@@ -26,27 +26,27 @@ ASSETS = [
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers.png",
-        "sha384": null,
+        "sha384": None,
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/layers-2x.png",
-        "sha384": null,
+        "sha384": None,
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-icon.png",
-        "sha384": null,
+        "sha384": None,
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-icon-2x.png",
-        "sha384": null,
+        "sha384": None,
     },
     {
         "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
         "path": ROOT / "assets/vendor/leaflet/images/marker-shadow.png",
-        "sha384": null,
+        "sha384": None,
     },
 ]
 
