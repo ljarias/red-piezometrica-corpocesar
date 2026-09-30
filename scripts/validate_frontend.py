@@ -57,6 +57,25 @@ for required_local_asset in (
     if required_local_asset not in HTML:
         errors.append(f"Falta dependencia frontend local: {required_local_asset}")
 
+
+# V4 hardening: política CSP mínima obligatoria.
+for required_csp in (
+    'http-equiv="Content-Security-Policy"',
+    "default-src 'self'",
+    "script-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+):
+    if required_csp not in HTML:
+        errors.append(f"Falta directiva CSP requerida: {required_csp}")
+
+if "script-src 'self' 'unsafe-inline'" in HTML:
+    errors.append("CSP no debe permitir unsafe-inline para scripts.")
+if "script-src 'self' 'unsafe-eval'" in HTML:
+    errors.append("CSP no debe permitir unsafe-eval para scripts.")
+
 if errors:
     raise SystemExit("ERROR FRONTEND:\n- " + "\n- ".join(errors))
 
