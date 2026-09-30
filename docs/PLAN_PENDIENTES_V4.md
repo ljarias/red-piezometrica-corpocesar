@@ -6,14 +6,14 @@
 | P02 | Validar fórmula de nivel absoluto | Hidrogeología | Crítica | Sí |
 | P03 | Definir rangos de plausibilidad por variable | Hidrogeología / calidad de datos | Alta | Sí |
 | P04 | Ejecutar auditoría WCAG 2.1 AA integral | Desarrollo + accesibilidad | Alta | Sí |
-| P05 | Incorporar equivalente tabular/textual completo para gráficas | Desarrollo | Alta | No, si existe alternativa institucional aceptada |
+| P05 | Incorporar equivalente tabular/textual completo para gráficas | Desarrollo | Alta | **Cerrado técnicamente V4** |
 | P06 | Designar responsable de publicación y aprobación | CORPOCESAR | Alta | Sí |
 | P07 | Definir licencia y condiciones de reutilización | Jurídica / datos abiertos | Alta | Sí para apertura formal |
 | P08 | Revisar dependencias externas y Actions por SHA | Desarrollo / seguridad | Media | No |
-| P09 | Definir procedimiento de incidentes y continuidad | Seguridad TI | Alta | Sí |
+| P09 | Definir procedimiento de incidentes y continuidad | Seguridad TI | Alta | **Procedimiento técnico creado; falta asignar responsables institucionales** |
 | P10 | Aprobar SAD, manual técnico, manual de usuario y matrices | Responsable institucional | Alta | Sí |
-| P11 | Regenerar dataset con ETL V3.3+ para incorporar hash de fuente | Operación de datos | Alta | Sí para trazabilidad completa |
-| P12 | Completar registro de primera liberación institucional | Responsable publicación | Alta | Sí |
+| P11 | Regenerar dataset con ETL V3.3+ para incorporar hash de fuente | Operación de datos | Alta | **Cerrado 2026-09-30 · CI SUCCESS** |
+| P12 | Completar registro de primera liberación institucional | Responsable publicación | Alta | **Registro técnico creado; falta responsable institucional** |
 
 ## Orden recomendado
 
