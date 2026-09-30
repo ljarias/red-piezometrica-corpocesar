@@ -44,3 +44,19 @@ if errors:
     raise SystemExit("ERROR FRONTEND:\n- " + "\n- ".join(errors))
 
 print("OK frontend: controles estaticos de accesibilidad e integridad superados.")
+
+# V4 hardening: las librerias de ejecucion no deben cargarse directamente desde CDN.
+for forbidden_runtime_cdn in (
+    'cdn.jsdelivr.net/npm/chart.js',
+    'unpkg.com/leaflet@',
+):
+    if forbidden_runtime_cdn in html:
+        errors.append(f'Dependencia CDN de ejecucion no permitida: {forbidden_runtime_cdn}')
+
+for required_local_asset in (
+    'assets/vendor/chartjs/chart.umd.min.js',
+    'assets/vendor/leaflet/leaflet.js',
+    'assets/vendor/leaflet/leaflet.css',
+):
+    if required_local_asset not in html:
+        errors.append(f'Falta dependencia frontend local: {required_local_asset}')
