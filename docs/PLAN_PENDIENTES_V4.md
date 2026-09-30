@@ -5,7 +5,7 @@
 | P01 | Aprobar clasificación de coordenadas, predio, seriales y documentos | Jurídica + Seguridad + responsable de información | Crítica | Sí |
 | P02 | Validar fórmula de nivel absoluto | Hidrogeología | Crítica | Sí |
 | P03 | Definir rangos de plausibilidad por variable | Hidrogeología / calidad de datos | Alta | Sí |
-| P04 | Ejecutar auditoría WCAG 2.1 AA integral | Desarrollo + accesibilidad | Alta | Sí |
+| P04 | Ejecutar auditoría WCAG 2.1 AA integral | Desarrollo + accesibilidad | Alta | Sí | **Cerrado técnicamente 2026-09-30 · teclado, reflow, contraste y NVDA validados** |
 | P05 | Incorporar equivalente tabular/textual completo para gráficas | Desarrollo | Alta | **Cerrado técnicamente V4** |
 | P06 | Designar responsable de publicación y aprobación | CORPOCESAR | Alta | Sí |
 | P07 | Definir licencia y condiciones de reutilización | Jurídica / datos abiertos | Alta | Sí para apertura formal |
