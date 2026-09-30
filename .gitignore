@@ -16,3 +16,6 @@ Thumbs.db
 
 # Estado temporal usado para comparar una actualización local
 data/.update_baseline.json
+
+# Dependencias frontend generadas y verificadas por scripts/vendor_frontend.py
+assets/vendor/
