@@ -9,7 +9,7 @@
 | P05 | Incorporar equivalente tabular/textual completo para gráficas | Desarrollo | Alta | Sí | **Cerrado técnicamente V4** |
 | P06 | Designar responsable de publicación y aprobación | CORPOCESAR | Alta | Sí | Pendiente de designación institucional |
 | P07 | Definir licencia y condiciones de reutilización | Jurídica / datos abiertos | Alta | Sí para apertura formal | Pendiente de definición jurídica |
-| P08 | Revisar dependencias externas y Actions por SHA | Desarrollo / seguridad | Media | No | **Integridad SHA acreditada por CI #90; revisión integral y aceptación pendientes** |
+| P08 | Revisar dependencias externas y Actions por SHA | Desarrollo / seguridad | Media | No | **Mitigaciones XSS/SHA, inventario y licencias verificados; CI #92 SUCCESS; cierre P08 sujeto a PR #3 Node 24 y aceptación de riesgos externos/ETL** |
 | P09 | Definir procedimiento de incidentes y continuidad | Seguridad TI | Alta | Sí | **Procedimiento técnico creado; falta asignar responsables institucionales** |
 | P10 | Aprobar SAD, manual técnico, manual de usuario y matrices | Responsable institucional | Alta | Sí | Pendiente de aprobación institucional |
 | P11 | Regenerar dataset con ETL V3.3+ para incorporar hash de fuente | Operación de datos | Alta | Sí | **Cerrado 2026-09-30 · CI SUCCESS** |
@@ -44,3 +44,9 @@
 **Hito D — Aprobación:** P10 y P12.
 
 El cierre se produce únicamente cuando los elementos marcados como bloqueantes tengan evidencia verificable y responsable identificado.
+
+## Avance correctivo de P08 — 2026-10-25
+
+La conciliación documental [PR #1](https://github.com/ljarias/red-piezometrica-corpocesar/pull/1) quedó integrada (`532acff6`). El correctivo [PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/pull/2) quedó integrado (`ab86451c`) tras pruebas de seguridad y [Pages #92 SUCCESS](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40197934789). Se corrigió el popup de Leaflet que interpolaba datos como HTML, se añadió SBOM parcial, licencias completas y guardas CI, y se ajustó OpenStreetMap al endpoint oficial. La revisión de advertencias Node 20→24 corresponde al [PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/pull/3), aún sujeto a validación de CI.
+
+**No marcar P08 como cerrado integralmente hasta registrar el éxito del último despliegue y la aceptación expresa de los riesgos residuales (teselas externas, ETL Python y vulnerabilidades futuras).** Su condición de no bloqueante para el cierre institucional V4 no equivale a validar P01/P07 ni a autorizar publicación de datos.
