@@ -1,0 +1,43 @@
+name: Verificar P08 sin desplegar
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  p08:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Descargar rama bajo revisión sin credenciales persistentes
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Verificar sintaxis Python y JavaScript
+        run: |
+          python -m compileall -q scripts tests
+          node --check assets/app.js
+          node --check tests/test_p08_popup_dom.cjs
+
+      - name: Validar inventario y políticas P08
+        run: python scripts/validate_supply_chain.py
+
+      - name: Pruebas funcionales popup Leaflet
+        run: node --test tests/test_p08_popup_dom.cjs
+
+      - name: Validar ocho dependencias con SHA-384
+        run: python scripts/vendor_frontend.py
+
+      - name: Ejecutar pruebas unitarias
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Validar frontend, seguridad y datos públicos
+        run: |
+          python scripts/validate_frontend.py
+          python scripts/validate_security_frontend.py
+          python scripts/validate_contrast.py
+          python scripts/validate_public_data.py
