@@ -34,11 +34,13 @@ Las GitHub Actions del workflow se fijaron a SHA completos resueltos desde los t
 
 El workflow aplica además mínimo privilegio.
 
-## Dependencias de navegador
+## Dependencias de navegador — estado actualizado para P08 (2026-10-25)
 
-Chart.js 4.4.7 y Leaflet 1.9.4 continúan cargándose desde CDN. No se incorporó un hash SRI de Chart.js sin verificarlo criptográficamente. Como siguiente hardening, se recomienda versionar copias locales verificadas de ambas librerías y Leaflet CSS/imagenes, eliminando esas dependencias CDN de ejecución.
+La descripción histórica de carga de Chart.js 4.4.7 y Leaflet 1.9.4 directamente desde CDN **ya no representa la implementación actual**. El [HTML de la rama principal](../index.html) referencia JavaScript y CSS desde `assets/vendor/`. El script [`vendor_frontend.py`](../scripts/vendor_frontend.py) descarga ocho recursos con versiones fijadas, verifica SHA-384 y los prepara localmente **durante la construcción**.
 
-Los mapas base permanecen necesariamente sujetos a servicios externos mientras se mantenga la arquitectura actual (OpenStreetMap, Esri y OpenTopoMap).
+La [ejecución #90](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/36722048949) del commit `70f468dfd4d93c301d34bc1039c8ea511ad34ae6` registró los ocho recursos verificados y terminó en `SUCCESS`. La [ejecución #61](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/36717957874) falló previamente por discrepancia SHA-384 de `layers-2x.png`, lo que demuestra la capacidad de bloqueo del control.
+
+El SHA-384 se verifica **en construcción**, no equivale a SRI ejecutado por el navegador. Persisten las descargas externas en construcción y las solicitudes a servicios cartográficos externos durante la ejecución (OpenStreetMap, Esri y OpenTopoMap). No constan aún SBOM y análisis formal de vulnerabilidades transitivas ni aprobación institucional de P08. Véanse el [plan de pendientes](PLAN_PENDIENTES_V4.md) y el [informe consolidado](INFORME_CIERRE_AUDITORIA_V4.md).
 
 ## Riesgo residual
 
