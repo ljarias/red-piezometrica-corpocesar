@@ -21,7 +21,7 @@ El último pipeline de consolidación técnica disponible al corte terminó en *
 | Clasificación de coordenadas, predio, seriales y documentos | Matriz creada | Pendiente institucional | Alto |
 | Accesibilidad | teclado, foco, reflow 200/400 %, contraste CI, NVDA, alternativas tabulares | Cerrado técnicamente | Bajo/medio |
 | Gráficas sin equivalente | tablas/resúmenes accesibles | Cerrado técnicamente | Bajo |
-| Dependencias frontend/Actions | versiones fijadas, SHA-384 y SHA exactos | Cerrado técnicamente | Bajo |
+| Dependencias frontend/Actions (P08) | Versiones fijadas, SHA-384 y SHA exactos; ejecución CI comprobada | Controles de integridad acreditados; cierre integral y aceptación pendientes | Riesgo de componentes externos/vulnerabilidades aún no cuantificado |
 | URLs dinámicas | HTTPS + allowlist + safeUrl | Cerrado técnicamente | Bajo |
 | XSS por HTML dinámico | escape de texto, DOM seguro y prueba CI | Hardening implementado | Bajo |
 | Integridad ETL | fuentes vacías, IDs duplicados y lecturas huérfanas bloqueadas | Cerrado técnicamente | Bajo |
@@ -59,6 +59,23 @@ Controles implementados:
 - CI bloquea regresiones de privacidad, frontend, contraste, XSS/URLs, datos y dependencias.
 
 Limitación residual: GitHub Pages no ofrece en este proyecto el mismo control de encabezados HTTP que un servidor Apache administrado. Una migración futura a infraestructura institucional permitiría HSTS, X-Frame-Options/frame-ancestors vía header, Referrer-Policy y otros encabezados gestionados en servidor.
+
+### Conciliación de P08 (adenda del 2026-10-25)
+
+Esta adenda precisa el alcance de «cerrado técnicamente» consignado al corte original del **2026-09-30** y alinea este informe con [PLAN_PENDIENTES_V4.md](PLAN_PENDIENTES_V4.md). **No declara un nuevo cierre institucional.**
+
+| Dimensión | Comprobación y fuente | Estado comprobado |
+|---|---|---|
+| Actions fijadas a SHA | Cuatro `uses:` con SHA completos en [deploy-pages.yml](../.github/workflows/deploy-pages.yml); el [log del job #90](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/36722048949/job/109909367616) registra la descarga de las Actions por SHA. | Implementado y ejecutado |
+| Dependencias frontend con control SHA-384 | [vendor_frontend.py](../scripts/vendor_frontend.py) descarga y verifica ocho recursos; el job #90 informa ocho `[OK]`. | Implementado y ejecutado |
+| Sustitución de CDN en ejecución | [index.html](../index.html) usa archivos `assets/vendor/`; el workflow los descarga desde CDN **en tiempo de construcción**, no como scripts externos en el navegador. | Implementado; servicios de descarga siguen siendo externos |
+| Bloqueo por discrepancia | [Run #61](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/36717957874) terminó en `FAILURE` al detectar SHA-384 incorrecto para `layers-2x.png`. | Ejecución histórica fallida que demuestra el bloqueo |
+| Ejecución y despliegue sobre la referencia auditada | [Run #90](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/36722048949), commit `70f468dfd4d93c301d34bc1039c8ea511ad34ae6`, concluyó `SUCCESS` y el log acredita carga del artefacto. | Ejecución existente verificada; artefacto final no cotejado binariamente en esta revisión |
+| Evaluación integral y aprobación | No se constató un SBOM/escaneo CVE, revisión independiente de licencias/transitivas ni visto bueno institucional específico. En #90 figura además una advertencia de compatibilidad Node.js 20/24. | Pendiente / no comprobable |
+
+El archivo [AUDITORIA_ACCESIBILIDAD_HARDENING_V4.md](AUDITORIA_ACCESIBILIDAD_HARDENING_V4.md) conserva una descripción histórica de CDN **en ejecución** que quedó desactualizada frente al `index.html` y workflow verificados. No debe emplearse como evidencia de comportamiento actual para P08 sin esta salvedad. [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) documenta licencias declaradas, pero no equivale a una revisión independiente de procedencia o vulnerabilidades.
+
+**Decisión de conciliación:** P08 mantiene el carácter **no bloqueante** del plan. Queda **acreditado el funcionamiento técnico de las salvaguardas SHA y su bloqueo ante errores**, pero **no se acredita cierre integral de cadena de suministro ni aprobación institucional**. La publicación definitiva V4 continúa supeditada a los pendientes institucionales ya enumerados en la sección 6.
 
 ## 5. Evidencia de accesibilidad
 
