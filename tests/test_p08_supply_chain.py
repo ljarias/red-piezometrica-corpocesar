@@ -61,7 +61,7 @@ class SupplyChainTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "changed.yml"
             path.write_text(
-                "steps:\\n  - uses: actions/checkout@" + "0" * 40 + "\\n",
+                "steps:\n  - uses: actions/checkout@" + "0" * 40 + "\n",
                 encoding="utf-8",
             )
             problems = audit_workflows(Path(directory))
