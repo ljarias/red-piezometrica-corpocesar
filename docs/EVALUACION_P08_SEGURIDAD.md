@@ -10,7 +10,7 @@
 |---|---|---|---|
 | Chart.js | 4.4.7 | Script local compilado desde jsDelivr en cada build, SHA-384 fijo | MIT, [licencia íntegra](../licenses/Chart.js-4.4.7-MIT.txt), archivo en [SBOM](SBOM_P08.json) |
 | Leaflet | 1.9.4 | JS, CSS y cinco imágenes locales, comprobados con SHA-384 | BSD-2-Clause, [licencia íntegra](../licenses/Leaflet-1.9.4-BSD-2-Clause.txt); incidencia de popups abordada |
-| Actions de GitHub Pages | checkout v6; configure-pages v5; upload-pages-artifact v4; deploy-pages v4 | Cuatro dependencias directas fijadas a SHA completo | [workflow de despliegue](../.github/workflows/deploy-pages.yml), privilegios mínimos por job |
+| Actions de GitHub Pages | checkout v6; configure-pages v6; upload-pages-artifact v5; deploy-pages v5.1 | Cuatro dependencias directas fijadas a SHA completo | [workflow de despliegue](../.github/workflows/deploy-pages.yml), privilegios mínimos por job |
 | pandas / openpyxl | 2.2.3 / 3.1.5 | Dependencias de ETL local, **no instaladas por el flujo Pages** | `requirements.txt`, sin hashes de wheels ni transitivas bloqueadas; revisión local pendiente |
 | OpenStreetMap | `https://tile.openstreetmap.org/{z}/{x}/{y}.png` | Teselas solicitadas por navegador | atribución, referer y caché ordinaria; [política del proveedor](https://operations.osmfoundation.org/policies/tiles/) |
 | Esri, OpenTopoMap | Endpoints HTTPS de teselas | Disponibilidad y condiciones dependientes de terceros | Mostrar atribución; validar autorización/condiciones de uso antes de liberación institucional |
@@ -61,7 +61,7 @@ El [SBOM CycloneDX 1.5](SBOM_P08.json) cubre **cuatro dependencias directas y oc
 - [x] CI del PR #2 y despliegue #92 concluidos satisfactoriamente; actualización Node24 del PR #3 fusionada y despliegue #93 concluidos en SUCCESS.
 - [x] Regresiones XSS verificadas en popup; política OSM y fuente local comprobadas.
 - [x] Inventario de dependencias directas, hashes, licencias y fuentes consistente (alcance parcial del SBOM).
-- [ ] Riesgos residuales aceptados por el responsable técnico, con alcance registrado; especialmente evaluación ETL transitiva y servicios externos.
+- [x] Riesgos residuales aceptados expresamente para el alcance técnico de P08 mediante [acta](ACTA_REVISION_P08_2026-10-25.md); el ETL transitivo, servicios externos y verificación visual permanecen en seguimiento.
 
 **Resultado verificado del ciclo correctivo (2026-10-25):** [PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/pull/2) fusionado en `ab86451cb7e5fd286fa2730836fbb47d348ee2d9`; [CI de PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40197862621) **SUCCESS** y [despliegue #92](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40197934789) **SUCCESS**. [PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/pull/3) actualizado a Actions Node 24 con SHA exacto, fusionado en `03562dae167811cd083a71f4c4fe537ffcf0b9d4`; [CI del PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198327158) **SUCCESS** y [despliegue #93](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198385482) **SUCCESS**.
 
@@ -70,3 +70,7 @@ El [job #93](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs
 **Decisión técnica recomendada:** `LISTO_PARA_CIERRE_TECNICO_CONDICIONADO` de P08. No equivale a estado cerrado: el responsable del proyecto debe firmar o registrar la aceptación de riesgos residuales y el alcance del cierre en el [acta de P08](ACTA_REVISION_P08_2026-10-25.md).
 
 **Límite del cierre:** el responsable debe aceptar formalmente los riesgos restantes de proveedores externos y ETL local antes de declarar P08 cerrado integralmente. La liberación institucional V4 permanece condicionada por P01, P02, P03, P06, P07, P09, P10 y P12.
+
+## 6. Decisión de cierre técnico aprobada — 2026-10-25
+
+El responsable aprobó expresamente el cierre técnico de P08; se registró en el [acta de aprobación y riesgos residuales](ACTA_REVISION_P08_2026-10-25.md). **Estado:** `CERRADO_TECNICAMENTE_CON_SEGUIMIENTO`. Este estado se sustenta en los PR #2 y #3, las pruebas de CI y el [despliegue #94 SUCCESS](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198758354). La aceptación no implica que se haya auditado el entorno ETL Python instalado ni que existan permisos institucionales para divulgar información.
