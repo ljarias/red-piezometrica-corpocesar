@@ -77,6 +77,12 @@ El archivo [AUDITORIA_ACCESIBILIDAD_HARDENING_V4.md](AUDITORIA_ACCESIBILIDAD_HAR
 
 **Decisión de conciliación:** P08 mantiene el carácter **no bloqueante** del plan. Queda **acreditado el funcionamiento técnico de las salvaguardas SHA y su bloqueo ante errores**, pero **no se acredita cierre integral de cadena de suministro ni aprobación institucional**. La publicación definitiva V4 continúa supeditada a los pendientes institucionales ya enumerados en la sección 6.
 
+### Resultado de remediación P08 (corte 2026-10-25)
+
+El cierre documental del [PR #1](https://github.com/ljarias/red-piezometrica-corpocesar/pull/1) se complementa con la corrección real del [PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/pull/2) (popup Leaflet sin interpolación HTML, endpoint OpenStreetMap, licencias completas, SBOM directo y CI preventivo) y la actualización a Actions Node 24 del [PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/pull/3). Se validó [Pages #93](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198385482): `SUCCESS`, ocho recursos con SHA-384 verificado, 16 pruebas Python y una prueba Node, publicación reportada como exitosa. El aviso Node 20 de la ejecución anterior desapareció.
+
+**Estado recomendado:** `LISTO_PARA_CIERRE_TECNICO_CONDICIONADO`. El cierre formal de P08 **no está firmado**: requiere aceptar explícitamente el riesgo de proveedores externos, el alcance parcial del SBOM/ETL Python y el aviso residual `punycode`. No se comprobó visualmente la URL pública. Véanse [evaluación](EVALUACION_P08_SEGURIDAD.md) y [acta de decisión](ACTA_REVISION_P08_2026-10-25.md). P08 no es un hallazgo bloqueante de los ocho pendientes institucionales.
+
 ## 5. Evidencia de accesibilidad
 
 P04 queda **cerrado técnicamente** al 2026-09-30 con evidencia de teclado, foco, navegación de pestañas, zoom/reflow 200 % y 400 %, contraste automatizado y prueba dirigida exitosa con NVDA. P05, equivalentes tabulares/textuales de las visualizaciones, también está cerrado técnicamente.
