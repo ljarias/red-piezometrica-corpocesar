@@ -57,10 +57,12 @@ El [SBOM CycloneDX 1.5](SBOM_P08.json) cubre **cuatro dependencias directas y oc
 
 ## 5. Criterios para recomendar cierre técnico de P08
 
-- [ ] PR correctivo revisado, integrado y asociado a commit verificable.
-- [ ] CI del PR y despliegue del commit final concluidos satisfactoriamente.
-- [ ] Regresiones XSS verificadas en popup; política OSM y fuente local comprobadas.
-- [ ] Inventario de dependencias, hashes, licencias y fuentes consistente.
+- [x] PR correctivo #2 revisado, integrado y asociado a commit verificable.
+- [x] CI del PR #2 y despliegue #92 concluidos satisfactoriamente. La actualización Node24 del PR #3 requerirá comprobación final independiente.
+- [x] Regresiones XSS verificadas en popup; política OSM y fuente local comprobadas.
+- [x] Inventario de dependencias directas, hashes, licencias y fuentes consistente (alcance parcial del SBOM).
 - [ ] Riesgos residuales aceptados por el responsable técnico, con alcance registrado; especialmente evaluación ETL transitiva y servicios externos.
 
-**Estado al redactar esta evaluación:** correcciones propuestas y pruebas definidas en una rama. La efectividad de CI y el cierre de P08 se registrarán únicamente tras comprobar los resultados reales. La liberación institucional V4 permanece condicionada por P01, P02, P03, P06, P07, P09, P10 y P12.
+**Resultado verificado del ciclo correctivo (2026-10-25):** el [PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/pull/2) fue fusionado como commit `ab86451cb7e5fd286fa2730836fbb47d348ee2d9`. El [CI de PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40197862621) y el [despliegue Pages #92](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40197934789) terminaron en **SUCCESS**. El job de despliegue reportó los ocho hashes correctos, **16 pruebas Python aprobadas**, una prueba funcional Node del popup, validaciones de privacidad, accesibilidad y publicación `Reported success!`. La ejecución #92 todavía mostró avisos de migración Node 20/24: la corrección basada en Actions oficiales Node 24 se propone en el [PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/pull/3), cuya ejecución debe validarse antes de su cierre.
+
+**Límite del cierre:** el responsable debe aceptar formalmente los riesgos restantes de proveedores externos y ETL local antes de declarar P08 cerrado integralmente. La liberación institucional V4 permanece condicionada por P01, P02, P03, P06, P07, P09, P10 y P12.
