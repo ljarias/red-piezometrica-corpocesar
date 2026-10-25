@@ -86,7 +86,7 @@ def audit_workflows(workflows: Path) -> list[str]:
         if re.search(r"^\s*permissions\s*:\s*write-all", source, re.MULTILINE):
             problems.append(f"Privilegios globales excesivos: {path.name}")
         for line in source.splitlines():
-            match = re.match(r"^\s*-\s*uses\s*:\s*(\S+)", line)
+            match = re.match(r"^\s*(?:-\s*)?uses\s*:\s*(\S+)", line)
             if not match:
                 continue
             pinned += 1
