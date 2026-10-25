@@ -21,7 +21,7 @@ El último pipeline de consolidación técnica disponible al corte terminó en *
 | Clasificación de coordenadas, predio, seriales y documentos | Matriz creada | Pendiente institucional | Alto |
 | Accesibilidad | teclado, foco, reflow 200/400 %, contraste CI, NVDA, alternativas tabulares | Cerrado técnicamente | Bajo/medio |
 | Gráficas sin equivalente | tablas/resúmenes accesibles | Cerrado técnicamente | Bajo |
-| Dependencias frontend/Actions (P08) | Versiones fijadas, SHA-384 y SHA exactos; ejecución CI comprobada | Controles de integridad acreditados; cierre integral y aceptación pendientes | Riesgo de componentes externos/vulnerabilidades aún no cuantificado |
+| Dependencias frontend/Actions (P08) | SHA-384, Actions SHA/Node 24, mitigación popup XSS, SBOM y pruebas CI/Pages #94 | **Cerrado técnicamente 2026-10-25 con aceptación del responsable** | Dependencias ETL transitivas, servicios externos y advertencias bajo seguimiento |
 | URLs dinámicas | HTTPS + allowlist + safeUrl | Cerrado técnicamente | Bajo |
 | XSS por HTML dinámico | escape de texto, DOM seguro y prueba CI | Hardening implementado | Bajo |
 | Integridad ETL | fuentes vacías, IDs duplicados y lecturas huérfanas bloqueadas | Cerrado técnicamente | Bajo |
@@ -82,6 +82,12 @@ El archivo [AUDITORIA_ACCESIBILIDAD_HARDENING_V4.md](AUDITORIA_ACCESIBILIDAD_HAR
 El cierre documental del [PR #1](https://github.com/ljarias/red-piezometrica-corpocesar/pull/1) se complementa con la corrección real del [PR #2](https://github.com/ljarias/red-piezometrica-corpocesar/pull/2) (popup Leaflet sin interpolación HTML, endpoint OpenStreetMap, licencias completas, SBOM directo y CI preventivo) y la actualización a Actions Node 24 del [PR #3](https://github.com/ljarias/red-piezometrica-corpocesar/pull/3). Se validó [Pages #93](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198385482): `SUCCESS`, ocho recursos con SHA-384 verificado, 16 pruebas Python y una prueba Node, publicación reportada como exitosa. El aviso Node 20 de la ejecución anterior desapareció.
 
 **Estado recomendado:** `LISTO_PARA_CIERRE_TECNICO_CONDICIONADO`. El cierre formal de P08 **no está firmado**: requiere aceptar explícitamente el riesgo de proveedores externos, el alcance parcial del SBOM/ETL Python y el aviso residual `punycode`. No se comprobó visualmente la URL pública. Véanse [evaluación](EVALUACION_P08_SEGURIDAD.md) y [acta de decisión](ACTA_REVISION_P08_2026-10-25.md). P08 no es un hallazgo bloqueante de los ocho pendientes institucionales.
+
+### Aprobación de cierre técnico P08 (2026-10-25)
+
+Tras corregir el uso inseguro de popups Leaflet, inventariar dependencias y licencias, fijar Actions compatibles con Node 24 y ejecutar los controles en GitHub Actions, el responsable del proyecto **aprobó expresamente el cierre técnico de P08**. La última referencia previa a esta decisión es [Pages #94](https://github.com/ljarias/red-piezometrica-corpocesar/actions/runs/40198758354), commit `c1243cfb91d9a20a9ebe142aad00dcb6faa00e67`, con estado `SUCCESS`, ocho verificaciones SHA-384, 16 pruebas Python y una funcional Node.
+
+El cierre se consigna como `CERRADO_TECNICAMENTE_CON_SEGUIMIENTO`, respaldado en el [acta de aprobación del responsable](ACTA_REVISION_P08_2026-10-25.md). **La aceptación se limita a los riesgos residuales especificados en el acta**: dependencias transitivas de ETL sin auditar, proveedores externos, aviso Leaflet mitigado en la aplicación, aviso menor `punycode` y comprobación visual del sitio pendiente. Ninguno se declara eliminado o probado cuando no lo está. Este cierre no representa conformidad legal institucional, aprobación de divulgación de datos o cierre de los ocho hallazgos bloqueantes del proyecto.
 
 ## 5. Evidencia de accesibilidad
 
