@@ -1,0 +1,278 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "application:red-piezometrica-v4",
+      "name": "red-piezometrica-corpocesar",
+      "version": "4"
+    },
+    "properties": [
+      {
+        "name": "p08:inventory-as-of",
+        "value": "2026-10-25"
+      },
+      {
+        "name": "p08:limitations",
+        "value": "SBOM de dependencias directas y ocho archivos frontend; transitivas Python y evaluación CVE requieren herramientas externas. No acredita ausencia de vulnerabilidades."
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/chart.js@4.4.7",
+      "name": "chart.js",
+      "version": "4.4.7",
+      "purl": "pkg:npm/chart.js@4.4.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/leaflet@1.9.4",
+      "name": "leaflet",
+      "version": "1.9.4",
+      "purl": "pkg:npm/leaflet@1.9.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/pandas@2.2.3",
+      "name": "pandas",
+      "version": "2.2.3",
+      "purl": "pkg:pypi/pandas@2.2.3",
+      "scope": "optional",
+      "properties": [
+        {
+          "name": "p08:usage",
+          "value": "ETL local; no se instala en Pages CI"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/openpyxl@3.1.5",
+      "name": "openpyxl",
+      "version": "3.1.5",
+      "purl": "pkg:pypi/openpyxl@3.1.5",
+      "scope": "optional",
+      "properties": [
+        {
+          "name": "p08:usage",
+          "value": "ETL local; no se instala en Pages CI"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/chartjs/chart.umd.min.js",
+      "name": "assets/vendor/chartjs/chart.umd.min.js",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "vsrfeLOOY6KuIYKDlmVH5UiBmgIdB1oEf7p01YgWHuqmOHfZr374+odEv96n9tNC"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/chart.js@4.4.7"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/leaflet.js",
+      "name": "assets/vendor/leaflet/leaflet.js",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/leaflet.css",
+      "name": "assets/vendor/leaflet/leaflet.css",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/images/layers.png",
+      "name": "assets/vendor/leaflet/images/layers.png",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers.png"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "80x85ZS+G189o0xL8E8D7BnfhuNss6EwUPHzG7e+qByRD2xnpxikZ6UQU4Re5nNy"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/images/layers-2x.png",
+      "name": "assets/vendor/leaflet/images/layers-2x.png",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/images/layers-2x.png"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "+F2ZWK/HTpkV9kN2HnMGCQOTM/cnQJLs770FLOeHznwVWRfDESI8z4JwcGYmy2Au"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/images/marker-icon.png",
+      "name": "assets/vendor/leaflet/images/marker-icon.png",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "wg83fCOXjBtqzFAWhTL9Sd9vmLUNhfEEzfmNUX9zwv2igKlz/YQbdapF4ObdxF+R"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/images/marker-icon-2x.png",
+      "name": "assets/vendor/leaflet/images/marker-icon-2x.png",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "bDEa1RhAAKIr/VQnMZ7gUhhXwmKYB4V0g8AsxOvCEPwGxfHCUEzAEMAEEzkjuxiA"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:assets/vendor/leaflet/images/marker-shadow.png",
+      "name": "assets/vendor/leaflet/images/marker-shadow.png",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png"
+        }
+      ],
+      "properties": [
+        {
+          "name": "p08:sha384-base64",
+          "value": "dB8ivfvPGb1MSIzX8oWTakCxmq+VwqP/QL1TX4jT4INR3pM5T4FgF3Gx4mN3NTMq"
+        },
+        {
+          "name": "p08:source-component",
+          "value": "pkg:npm/leaflet@1.9.4"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "application:red-piezometrica-v4",
+      "dependsOn": [
+        "pkg:npm/chart.js@4.4.7",
+        "pkg:npm/leaflet@1.9.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/chart.js@4.4.7",
+      "dependsOn": [
+        "file:assets/vendor/chartjs/chart.umd.min.js"
+      ]
+    },
+    {
+      "ref": "pkg:npm/leaflet@1.9.4",
+      "dependsOn": [
+        "file:assets/vendor/leaflet/leaflet.js",
+        "file:assets/vendor/leaflet/leaflet.css",
+        "file:assets/vendor/leaflet/images/layers.png",
+        "file:assets/vendor/leaflet/images/layers-2x.png",
+        "file:assets/vendor/leaflet/images/marker-icon.png",
+        "file:assets/vendor/leaflet/images/marker-icon-2x.png",
+        "file:assets/vendor/leaflet/images/marker-shadow.png"
+      ]
+    }
+  ]
+}
