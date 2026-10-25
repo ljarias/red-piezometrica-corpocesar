@@ -21,10 +21,19 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Validar cadena de suministro P08
+        run: python scripts/validate_supply_chain.py
+
+      - name: Comprobar sintaxis del frontend
+        run: node --check assets/app.js
+
+      - name: Probar popup seguro contra HTML hostil
+        run: node --test tests/test_p08_popup_dom.cjs
 
       - name: Preparar dependencias frontend verificadas
         run: python scripts/vendor_frontend.py
