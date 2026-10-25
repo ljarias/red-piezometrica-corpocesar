@@ -21,6 +21,16 @@ EXPECTED_LIBRARIES = {
 EXPECTED_ETL = {"pandas": "2.2.3", "openpyxl": "3.1.5"}
 VENDOR_HOSTS = {"cdn.jsdelivr.net", "unpkg.com"}
 EXPECTED_ASSETS = 8
+APPROVED_ACTIONS = {
+    "actions/checkout": "d23441a48e516b6c34aea4fa41551a30e30af803",
+    "actions/configure-pages": "983d7736d9b0ae728b81ab479565c72886d7745b",
+    "actions/upload-pages-artifact": "7b1f4a764d45c48632c6b24a0339c27f5614fb0b",
+    "actions/deploy-pages": "d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e",
+}
+REQUIRED_LICENSES = {
+    "Chart.js-4.4.7-MIT.txt": "Copyright (c) 2014-2024 Chart.js Contributors",
+    "Leaflet-1.9.4-BSD-2-Clause.txt": "Copyright (c) 2010-2023, Volodymyr Agafonkin",
+}
 
 
 def audit_assets(assets: list[dict], components: list[dict]) -> list[str]:
@@ -93,6 +103,10 @@ def audit_workflows(workflows: Path) -> list[str]:
             action = match.group(1)
             if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[a-f0-9]{40}", action):
                 problems.append(f"Action no fijada con SHA completo: {path.name} / {action}")
+                continue
+            action_name, action_sha = action.split("@", 1)
+            if APPROVED_ACTIONS.get(action_name) != action_sha:
+                problems.append(f"Action no aprobada o SHA distinto: {path.name} / {action}")
     if pinned < 4:
         problems.append("Se esperan al menos las cuatro Actions originales fijadas por SHA.")
     return problems
@@ -147,6 +161,10 @@ def audit() -> list[str]:
             problems.append(f"Dependencia JS no coincide: {ref}")
         if license_id not in [v.get("license", {}).get("id") for v in item.get("licenses", [])]:
             problems.append(f"Licencia no documentada: {ref}")
+    for license_name, copyright_text in REQUIRED_LICENSES.items():
+        license_file = ROOT / "licenses" / license_name
+        if not license_file.is_file() or copyright_text not in license_file.read_text(encoding="utf-8"):
+            problems.append(f"Licencia de distribución ausente o incompleta: {license_name}")
     requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8").splitlines()
     declared = dict(line.split("==", 1) for line in requirements if "==" in line)
     if declared != EXPECTED_ETL:
