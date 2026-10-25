@@ -57,6 +57,16 @@ class SupplyChainTests(unittest.TestCase):
         problems = audit_frontend(changed, self.html)
         self.assertTrue(any("OSM" in x for x in problems), problems)
 
+    def test_action_sha_changes_are_detected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "changed.yml"
+            path.write_text(
+                "steps:\\n  - uses: actions/checkout@" + "0" * 40 + "\\n",
+                encoding="utf-8",
+            )
+            problems = audit_workflows(Path(directory))
+            self.assertTrue(any("SHA distinto" in x for x in problems), problems)
+
     def test_unpinned_action_rejected(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "unsafe.yml"
